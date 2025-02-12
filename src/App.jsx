@@ -1,9 +1,41 @@
 import './App.css';
+import ContactList from './components/ContactList';
+import ContactDetails from './components/ContactDetails';
+import CreateContact from './components/CreateContact';
+import { Link, Route, Routes } from 'react-router-dom';
+import { createContext, useEffect, useState } from 'react';
+
+const ContactContext = createContext()
 
 function App() {
+    const [contacts, setContacts] = useState([])
+
+    useEffect(() => {
+        fetch('https://boolean-uk-api-server.fly.dev/anselin-thefirst/contact')
+        .then (res => res.json())
+        .then (data => setContacts(data) )
+      }, []);
+
     return (
-        <p>Hello, world!</p>
+        <div className='App'>
+            <ContactContext.Provider value={{contacts: contacts, setContacts: setContacts}}>
+            <header>
+                <h1>Menu</h1>
+                <nav>
+                    <ul>
+                        <Link to="/">Contact list</Link>
+                        <Link to="/create">Create new contact</Link> 
+                    </ul>
+                </nav>
+            </header>
+            <Routes>
+                <Route path='/' element={<ContactList />} />
+                <Route path='/contact/:id' element={<ContactDetails />} />
+                <Route path='/create' element={<CreateContact />} />
+            </Routes>
+            </ContactContext.Provider>
+        </div>
     );
 }
 
-export default App;
+export {App, ContactContext};
