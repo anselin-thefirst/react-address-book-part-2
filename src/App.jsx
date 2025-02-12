@@ -4,6 +4,7 @@ import ContactDetails from './components/ContactDetails';
 import CreateContact from './components/CreateContact';
 import { Link, Route, Routes } from 'react-router-dom';
 import { createContext, useEffect, useState } from 'react';
+import UpdateContact from './components/UpdateContact';
 
 const ContactContext = createContext()
 
@@ -33,6 +34,7 @@ function App() {
                 <Route path='/' element={<ContactList />} />
                 <Route path='/contact/:id' element={<ContactDetails />} />
                 <Route path='/create' element={<CreateContact />} />
+                <Route path='/edit/:id' element={<UpdateContact />} />
             </Routes>
             </main>
             </ContactContext.Provider>
