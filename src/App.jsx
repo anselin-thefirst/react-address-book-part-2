@@ -17,9 +17,9 @@ function App() {
       }, []);
 
     return (
-        <div className='App'>
+        <div className='app'>
             <ContactContext.Provider value={{contacts: contacts, setContacts: setContacts}}>
-            <header>
+            <header className='menu'>
                 <h1>Menu</h1>
                 <nav>
                     <ul>
@@ -28,11 +28,13 @@ function App() {
                     </ul>
                 </nav>
             </header>
+            <main className='content'>
             <Routes>
                 <Route path='/' element={<ContactList />} />
                 <Route path='/contact/:id' element={<ContactDetails />} />
                 <Route path='/create' element={<CreateContact />} />
             </Routes>
+            </main>
             </ContactContext.Provider>
         </div>
     );
